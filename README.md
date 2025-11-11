@@ -1,4 +1,4 @@
 Alunos:
-Hugo Nunes
-Nicholas Rafael
-Louie Felipe
+- Hugo Nunes
+- Nicholas Rafael
+- Louie Felipe
