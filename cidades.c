@@ -40,9 +40,9 @@ int compararCidades(const void *a, const void *b) {
     return c1->Posicao - c2->Posicao;
 }
 
-// ==============================
+
 // 1. getEstrada()
-// ==============================
+
 Estrada *getEstrada(const char *nomeArquivo) {
     FILE *fp = fopen(nomeArquivo, "r");
     if (!fp) {
@@ -133,9 +133,9 @@ Estrada *getEstrada(const char *nomeArquivo) {
     return E;
 }
 
-// ==============================
+
 // 2. calcularMenorVizinhanca()
-// ==============================
+
 double calcularMenorVizinhanca(const char *nomeArquivo) {
     FILE *fp = fopen(nomeArquivo, "r");
     if (!fp) return -1.0;
@@ -176,9 +176,8 @@ double calcularMenorVizinhanca(const char *nomeArquivo) {
     return menor;
 }
 
-// ==============================
-// 3. cidadeMenorVizinhanca()
-// ==============================
+// 3. cidadeMenorVizinhanca
+
 char *cidadeMenorVizinhanca(const char *nomeArquivo) {
     FILE *fp = fopen(nomeArquivo, "r");
     if (!fp) return NULL;

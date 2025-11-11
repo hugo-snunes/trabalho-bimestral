@@ -13,7 +13,7 @@ int main(int argc, char const *argv[]) {
     Estrada *e = getEstrada(arquivo);
 
     if (e == NULL) {
-        printf("\n❌ Erro ao carregar dados da estrada.\n");
+        printf("\nErro ao carregar dados da estrada.\n");
         return 1;
     }
 
