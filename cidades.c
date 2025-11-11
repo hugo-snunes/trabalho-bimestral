@@ -72,7 +72,7 @@ Estrada *getEstrada(const char *nomeArquivo) {
 
     // Lê as cidades
     for (int i = 0; i < N; i++) {
-        if (fscanf(fp, "%d %255s", &temp[i].Posicao, temp[i].Nome) != 2) {
+        if (fscanf(fp, "%d %[^\n]", &temp[i].Posicao, temp[i].Nome) != 2) {
             printf("ERRO: leitura inválida na linha %d.\n", i + 3);
             free(temp);
             fclose(fp);
