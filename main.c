@@ -8,7 +8,7 @@ int main(int argc, char const *argv[]) {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 
-    const char *arquivo = (argc > 1) ? argv[1] : "teste02.txt";
+    const char *arquivo = (argc > 1) ? argv[1] : "teste03.txt";
 
     Estrada *e = getEstrada(arquivo);
 

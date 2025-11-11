@@ -1,0 +1,7 @@
+50
+5
+10 Cidade 
+20 Vila
+22 Porto 
+30 Colina
+45 Montanha

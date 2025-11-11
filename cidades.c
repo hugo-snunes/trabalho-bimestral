@@ -87,7 +87,7 @@ Estrada *getEstrada(const char *nomeArquivo) {
             return NULL;
         }
 
-        // Verifica duplicata
+        // Verifica duplicada
         for (int j = 0; j < i; j++) {
             if (temp[i].Posicao == temp[j].Posicao) {
                 printf("ERRO: posições duplicadas (%d) detectadas.\n", temp[i].Posicao);
@@ -179,5 +179,76 @@ double calcularMenorVizinhanca(const char *nomeArquivo) {
 // 3. cidadeMenorVizinhanca
 
 char *cidadeMenorVizinhanca(const char *nomeArquivo) {
-    
+    FILE *fp = fopen(nomeArquivo, "r");
+    if (!fp) return NULL;
+
+    int T, N;
+    if (fscanf(fp, "%d", &T) != 1 || fscanf(fp, "%d", &N) != 1) {
+        fclose(fp);
+        return NULL;
+    }
+
+    TempCidade *temp = malloc(sizeof(TempCidade) * N);
+    if (!temp) {
+        fclose(fp);
+        return NULL;
+    }
+
+    for (int i = 0; i < N; i++) {
+        if (fscanf(fp, "%d %[^\n]", &temp[i].Posicao, temp[i].Nome) != 2) {
+            free(temp);
+            fclose(fp);
+            return NULL;
+        }
+    }
+    fclose(fp);
+
+    // Ordena as cidades pela posição
+    qsort(temp, N, sizeof(TempCidade), compararCidades);
+
+    double menorVizinhanca = 1e9 + 7; // Inicializa com um valor grande
+    char *nomeMenorVizinhanca = NULL;
+
+    for (int i = 0; i < N; i++) {
+        double viz;
+        
+        // Cidades nas extremidades
+        if (i == 0) {
+            // Primeira cidade: vizinhança é metade da distância para a próxima
+            // mais a distância até o início da estrada 0
+
+            viz = (temp[i + 1].Posicao + temp[i].Posicao) / 2.0;
+        } else if (i == N - 1) {
+            // Última cidade: vizinhança é metade da distância para a anterior
+            // mais a distância do ponto médio até o fim da estrada T
+
+            double pontoMedioAnterior = (temp[i].Posicao + temp[i - 1].Posicao) / 2.0;
+            viz = (double)T - pontoMedioAnterior;
+        } else {
+        
+            viz = (temp[i + 1].Posicao - temp[i - 1].Posicao) / 2.0;
+        }
+        // Se a vizinhança atual for menor que a menor registrada,
+        // ou for igual, atualiza a menor vizinhança e o nome da cidade
+
+        if (viz < menorVizinhanca) {
+            menorVizinhanca = viz;
+        
+            if (nomeMenorVizinhanca != NULL) {
+                free(nomeMenorVizinhanca);
+            }   
+
+            nomeMenorVizinhanca = (char *) malloc(sizeof(char) * (strlen(temp[i].Nome) + 1));
+            
+            if (!nomeMenorVizinhanca) {
+                free(temp);
+                return NULL;
+            }
+            
+            strcpy(nomeMenorVizinhanca, temp[i].Nome);
+        }
+    }
+
+    free(temp); 
+    return nomeMenorVizinhanca;
 }
