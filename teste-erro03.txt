@@ -1,0 +1,4 @@
+50
+2
+0 CidadeA
+30 CidadeB
