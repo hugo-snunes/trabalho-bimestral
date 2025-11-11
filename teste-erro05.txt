@@ -1,0 +1,5 @@
+100
+3
+10 CidadeA
+10 CidadeB
+40 CidadeC
