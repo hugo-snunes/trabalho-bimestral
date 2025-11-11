@@ -179,47 +179,5 @@ double calcularMenorVizinhanca(const char *nomeArquivo) {
 // 3. cidadeMenorVizinhanca
 
 char *cidadeMenorVizinhanca(const char *nomeArquivo) {
-    FILE *fp = fopen(nomeArquivo, "r");
-    if (!fp) return NULL;
-
-    int T, N;
-    if (fscanf(fp, "%d", &T) != 1 || fscanf(fp, "%d", &N) != 1) {
-        fclose(fp);
-        return NULL;
-    }
-
-    TempCidade *temp = malloc(sizeof(TempCidade) * N);
-    if (!temp) {
-        fclose(fp);
-        return NULL;
-    }
-
-    for (int i = 0; i < N; i++)
-        fscanf(fp, "%d %255s", &temp[i].Posicao, temp[i].Nome);
-    fclose(fp);
-
-    qsort(temp, N, sizeof(TempCidade), compararCidades);
-
-    double menor = 1e9;
-    int indice = 0;
-    for (int i = 0; i < N; i++) {
-        double viz;
-        if (i == 0)
-            viz = (temp[i + 1].Posicao + temp[i].Posicao) / 2.0;
-        else if (i == N - 1)
-            viz = (double)T - (temp[i].Posicao + temp[i - 1].Posicao) / 2.0;
-        else
-            viz = (temp[i + 1].Posicao - temp[i - 1].Posicao) / 2.0;
-
-        if (viz < menor) {
-            menor = viz;
-            indice = i;
-        }
-    }
-
-    char *resultado = malloc(strlen(temp[indice].Nome) + 1);
-    strcpy(resultado, temp[indice].Nome);
-
-    free(temp);
-    return resultado;
+    
 }
